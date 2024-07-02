@@ -120,7 +120,7 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void menuPegawaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPegawaiActionPerformed
         // TODO add your handling code here:
-        FormPenjualan fp = new FormPenjualan();
+        FormPegawai fp = new FormPegawai();
         fp.setVisible(true);
     }//GEN-LAST:event_menuPegawaiActionPerformed
 
