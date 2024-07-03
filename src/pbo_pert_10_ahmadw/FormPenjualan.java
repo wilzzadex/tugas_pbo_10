@@ -554,7 +554,7 @@ public class FormPenjualan extends javax.swing.JFrame {
                 String id = (String) model.getValueAt(i, 0);
 
                 st = cn.createStatement();
-                st.executeUpdate("delete from tbl_hitung_jual where no_faktur = '" + id + "'");
+                st.executeUpdate("delete from tbl_hitung_jual where id_hitung = '" + id + "'");
 
                 nofaktur();
                 loadData();
@@ -651,7 +651,7 @@ public class FormPenjualan extends javax.swing.JFrame {
     private void btnCetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCetakActionPerformed
         // TODO add your handling code here:
         try {
-            Desktop.getDesktop().browse(new URL("http://localhost:8889/cetak_invoice/invoice.php?lap&fk=" + txtFaktur.getText() + "").toURI());
+            Desktop.getDesktop().browse(new URL("http://localhost:8888/cetak_invoice/invoice.php?lap&fk=" + txtFaktur.getText() + "").toURI());
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -722,7 +722,7 @@ public class FormPenjualan extends javax.swing.JFrame {
             ResultSet r = s.executeQuery(sql);
             while (r.next()) {
                 Object[] o = new Object[6];
-                o[0] = r.getString("no_faktur");
+                o[0] = r.getString("id_hitung");
                 o[1] = r.getString("kd_barang");
                 o[2] = r.getString("nama_barang");
                 o[3] = r.getString("hsatuan");
@@ -747,13 +747,6 @@ public class FormPenjualan extends javax.swing.JFrame {
             while (r.next()) {
                 cbxBarang.addItem(r.getString("nama_barang"));
             }
-            // The following lines are not necessary unless you need the row count for some reason
-            // r.last();
-            // int jumlahdata = r.getRow();
-            // r.first();
-//            r.close();
-//            s.close();
-//            c.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }

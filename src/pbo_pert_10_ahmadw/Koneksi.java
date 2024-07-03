@@ -18,7 +18,7 @@ public class Koneksi {
     public static java.sql.Connection getKoneksi() {
         if (koneksi == null) {
             try {
-                String url = "jdbc:mysql://localhost:3306/tugas_pert_10";
+                String url = "jdbc:mysql://localhost:8889/tugas_pbo";
                 String user = "root";
                 String password = "root";
              

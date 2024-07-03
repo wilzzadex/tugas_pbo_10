@@ -382,12 +382,26 @@ public class FormPegawai extends javax.swing.JFrame {
             String alamat = txtAlamat.getText();
 
             try {
-                
+                Connection c = Koneksi.getKoneksi();
+                String checkSql = "SELECT COUNT(*) FROM tbl_login WHERE username = ? OR email = ?";
+                PreparedStatement checkStmt = c.prepareStatement(checkSql);
+                checkStmt.setString(1, username);
+                checkStmt.setString(2, email);
+                ResultSet rs = checkStmt.executeQuery();
+                rs.next();
+                int count = rs.getInt(1);
+                rs.close();
+                checkStmt.close();
+
+                if (count > 0) {
+                    JOptionPane.showMessageDialog(null, "Username or email already exists.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                    return;
+                };
                 long millis = System.currentTimeMillis();
                 java.sql.Date date = new java.sql.Date(millis);
                 System.out.println(date);
                 String tgl = date.toString();
-                Connection c = Koneksi.getKoneksi();
+                
                 String sql = "INSERT INTO tbl_login VALUES (?, ?, ?, ?, ?, ?,?)";
                 PreparedStatement p = c.prepareStatement(sql);
                 p.setString(1, username);
@@ -399,13 +413,15 @@ public class FormPegawai extends javax.swing.JFrame {
                 p.setString(7, alamat);
                 p.executeUpdate();
                 p.close();
+                
+                loadData();
+                resetForm();
+                JOptionPane.showMessageDialog(null, "Data berhasil tersimpan", "elekronik berkah", JOptionPane.INFORMATION_MESSAGE);
 
             } catch (SQLException e) {
                 System.out.println(e);
             } finally {
-                loadData();
-                resetForm();
-                JOptionPane.showMessageDialog(null, "Data berhasil tersimpan", "elekronik berkah", JOptionPane.INFORMATION_MESSAGE);
+                
             }
         }
     }//GEN-LAST:event_btnTambahActionPerformed
