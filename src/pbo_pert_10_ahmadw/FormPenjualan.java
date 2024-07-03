@@ -651,7 +651,7 @@ public class FormPenjualan extends javax.swing.JFrame {
     private void btnCetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCetakActionPerformed
         // TODO add your handling code here:
         try {
-            Desktop.getDesktop().browse(new URL("http://localhost:8888/cetak_invoice/invoice.php?lap&fk=" + txtFaktur.getText() + "").toURI());
+            Desktop.getDesktop().browse(new URL("http://localhost:8888/pbo_penjualan/invoice.php?lap&fk=" + txtFaktur.getText() + "").toURI());
         } catch (Exception e) {
             System.out.println(e);
         }
